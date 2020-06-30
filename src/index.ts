@@ -53,7 +53,7 @@ logger.info(`Running ${appName} now (${new Date().toISOString()})`);
   //-------------------------------------------------
   try {
     await ingest();
-    logger.debug('Ingestion finished');
+    logger.info('Ingestion finished');
   } catch (err) {
     logger.error(`Failed to ingest. (${err.message}).`, err);
     // TODO: Is there benefit in exiting with process.exit(1) when it fails? I.e. does this mean kubernetes will mark it as a failure.

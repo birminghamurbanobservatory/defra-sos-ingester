@@ -17,6 +17,8 @@ export async function ingest(): Promise<void> {
 
   await Promise.mapSeries(stations, processStation);
 
+  logger.info(`${stations.length} stations have been processed.`);
+
   return;
 
 }
