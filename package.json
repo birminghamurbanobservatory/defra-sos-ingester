@@ -1,0 +1,45 @@
+{
+  "name": "defra-sos-ingester",
+  "version": "1.0.0",
+  "description": "Pulls in Defra data from its Sensor Observations Service (SOS). Intended to be run as a CronJob.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "test": "LOGGER_ENABLED=false jest --runInBand --env=node",
+    "test-debug": "LOGGER_ENABLED=true LOGGER_FORMAT=terminal LOGGER_LEVEL=debug jest --runInBand --env=node",
+    "build": "rm -rf dist && tsc",
+    "build:start": "npm run build && npm start",
+    "build:live": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
+    "docker:build": "docker build -t gcr.io/urban-observatory/defra-sos-ingester:$npm_package_version .",
+    "docker:push": "docker push gcr.io/urban-observatory/defra-sos-ingester:$npm_package_version",
+    "dockerise": "npm run build && npm run docker:build && npm run docker:push"
+  },
+  "author": "Si Bell",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "axios": "^0.19.2",
+    "bluebird": "^3.7.2",
+    "check-types": "^11.1.2",
+    "cls-hooked": "^4.2.2",
+    "date-fns": "^2.14.0",
+    "dotenv": "^8.2.0",
+    "event-stream": "github:birminghamurbanobservatory/event-stream#semver:^2.0.0",
+    "lodash": "^4.17.15",
+    "mongoose": "^5.9.20",
+    "node-logger": "github:birminghamurbanobservatory/node-logger#semver:^1.0.0",
+    "shortid": "^2.2.15"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.3",
+    "@types/node": "^14.0.14",
+    "@typescript-eslint/eslint-plugin": "^3.4.0",
+    "@typescript-eslint/parser": "^3.4.0",
+    "eslint": "^7.3.1",
+    "jest": "^26.1.0",
+    "nodemon": "^2.0.4",
+    "ts-jest": "^26.1.1",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5"
+  }
+}
