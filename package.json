@@ -15,6 +15,10 @@
     "dockerise": "npm run build && npm run docker:build && npm run docker:push"
   },
   "author": "Si Bell",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/birminghamurbanobservatory/defra-sos-ingester.git"
+  },
   "license": "ISC",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
