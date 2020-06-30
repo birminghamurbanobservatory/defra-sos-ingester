@@ -14,7 +14,7 @@ export async function getTimeseries(timeseriesId: number, startDate: Date, endDa
 
   const startIso = startDate.toISOString();
   const endIso = endDate.toISOString();
-  const limit = 1000; // worth setting this because if you don't the server will try to get you everything which can take a very long time, so it's best to limit it. If it failed to get everything the first ime then the next time the CronJob runs it can just pick up where it left off.
+  const limit = 200; // worth setting this because if you don't the server will try to get you everything which can take a very long time, so it's best to limit it. If it failed to get everything the first ime then the next time the CronJob runs it can just pick up where it left off.
   
   try {
     
