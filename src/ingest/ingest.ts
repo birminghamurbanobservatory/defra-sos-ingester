@@ -7,6 +7,7 @@ import {sub, add} from 'date-fns';
 import {cloneDeep, isEqual} from 'lodash';
 import * as event from 'event-stream';
 import {ObservationClient} from './observation-client.class';
+import * as check from 'check-types';
 
 
 export async function ingest(): Promise<void> {
@@ -104,6 +105,18 @@ function buildObservation(reading: TimeseriesReading, prefix: string, key: strin
     observation.hasResult.flags = ['error']; // generic error
   }
 
+  if (check.nonEmptyArray(info.procedures)) {
+    observation.usedProcedures = info.usedProcedures;
+  }
+
+  if (info.aggregation && info.aggregation !== 'instant') {
+    observation.phenomenonTime = {
+      // All the readings appear to be a mean over the last hour.
+      hasBeginning: sub(reading.timestamp, {hours: 1}).toISOString(),
+      hasEnd: reading.timestamp.toISOString()
+    };
+  }
+
   return observation;
 
 }
@@ -115,46 +128,52 @@ function getUrbanObsInfoForVariable(key: string) {
     'pm2.5': {
       observedProperty: 'pm2p5-mass-concentration',
       unit: 'microgram-per-cubic-metre',
-      aggregation: 'instant',
-      sensorSuffix: 'pm-sensor'
-      // TODO: Add some procedures too? 
+      aggregation: 'average',
+      sensorSuffix: 'pm-sensor',
+      usedProcedures: ['aurn-pm2p5-method']
       // https://uk-air.defra.gov.uk/networks/monitoring-methods?view=eu-standards
     },
     pm10: {
       observedProperty: 'pm10-mass-concentration',
       unit: 'microgram-per-cubic-metre',
-      aggregation: 'instant',
-      sensorSuffix: 'pm-sensor'
+      aggregation: 'average',
+      sensorSuffix: 'pm-sensor',
+      usedProcedures: ['aurn-pm10-method']
     },
     so2: {
       observedProperty: 'sulphur-dioxide-mass-concentration',
       unit: 'microgram-per-cubic-metre',
-      aggregation: 'instant',
-      sensorSuffix: 'so2-sensor'
+      aggregation: 'average',
+      sensorSuffix: 'so2-sensor',
+      usedProcedures: ['aurn-so2-method']
     }, 
     no2: {
       observedProperty: 'nitrogen-dioxide-mass-concentration',
       unit: 'microgram-per-cubic-metre',
-      aggregation: 'instant',
-      sensorSuffix: 'chemilumi-sensor'
+      aggregation: 'average',
+      sensorSuffix: 'chemilumi-sensor',
+      usedProcedures: ['aurn-no2-method']
     }, 
     nox: {
       observedProperty: 'nitrogen-oxides-mass-concentration',
       unit: 'microgram-per-cubic-metre',
-      aggregation: 'instant',
-      sensorSuffix: 'chemilumi-sensor'
+      aggregation: 'average',
+      sensorSuffix: 'chemilumi-sensor',
+      usedProcedures: ['aurn-nox-method']
     },
     no: {
       observedProperty: 'nitrogen-monoxide-mass-concentration',
       unit: 'microgram-per-cubic-metre',
-      aggregation: 'instant',
-      sensorSuffix: 'chemilumi-sensor'
+      aggregation: 'average',
+      sensorSuffix: 'chemilumi-sensor',
+      usedProcedures: ['aurn-no-method']
     },
     o3: {
       observedProperty: 'ozone-mass-concentration',
       unit: 'microgram-per-cubic-metre',
-      aggregation: 'instant',
-      sensorSuffix: 'ozone-sensor'
+      aggregation: 'average',
+      sensorSuffix: 'ozone-sensor',
+      usedProcedures: ['aurn-ozone-method']
     }
   };
 

@@ -16,6 +16,6 @@ class Result {
 }
 
 class PhenomenonTime {
-  hasBeginning: Date;
-  hasEnd: Date;
+  hasBeginning: string;
+  hasEnd: string;
 }
