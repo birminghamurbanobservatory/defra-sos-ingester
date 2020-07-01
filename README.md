@@ -14,6 +14,10 @@ N.B. there can be more than one timeseries listed per station, although generall
 
 ## Documentation
 
+Comment from the company Ricardo on how the sample is perform:
+
+> These will be the average over the preceding hour, the frequency of the spot readings and how analysers work these up to the averaging periods will vary from make to make, but there is a residence time for the gas to be detected, so around 1 minute detection for a typical ambient gas analyser.  Similar for particulate and particulate speciation (which will have the longest detection dwell time of about 15 minutes, but it is sampling air all through that time onto a rotating denuder). Fastest analyser I’ve used is 20Hz point measurements but nothing like that is currently out in the AURN.
+
 - [EU Standard Methods for monitoring and UK Approach](https://uk-air.defra.gov.uk/networks/monitoring-methods?view=eu-standards)
 
 - [AURN](https://uk-air.defra.gov.uk/networks/network-info?view=aurn)
