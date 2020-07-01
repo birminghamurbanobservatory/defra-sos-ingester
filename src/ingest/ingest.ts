@@ -100,6 +100,10 @@ function buildObservation(reading: TimeseriesReading, prefix: string, key: strin
     madeBySensor: `${prefix}-${info.sensorSuffix}`
   };
 
+  if (reading.value === -99) {
+    observation.hasResult.flags = ['error']; // generic error
+  }
+
   return observation;
 
 }
