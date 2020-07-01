@@ -105,7 +105,7 @@ function buildObservation(reading: TimeseriesReading, prefix: string, key: strin
     observation.hasResult.flags = ['error']; // generic error
   }
 
-  if (check.nonEmptyArray(info.procedures)) {
+  if (check.nonEmptyArray(info.usedProcedures)) {
     observation.usedProcedures = info.usedProcedures;
   }
 
