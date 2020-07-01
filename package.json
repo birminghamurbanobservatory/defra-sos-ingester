@@ -1,6 +1,6 @@
 {
   "name": "defra-sos-ingester",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Pulls in Defra data from its Sensor Observations Service (SOS). Intended to be run as a CronJob.",
   "main": "index.js",
   "scripts": {
