@@ -4,7 +4,7 @@ import {StationApp, Timeseries} from '../station/station-app';
 import * as Promise from 'bluebird';
 import {getTimeseries, TimeseriesReading} from './sos.service';
 import {sub, add} from 'date-fns';
-import {cloneDeep, isEqual} from 'lodash';
+import {cloneDeep, isEqual, round} from 'lodash';
 import * as event from 'event-stream';
 import {ObservationClient} from './observation-client.class';
 import * as check from 'check-types';
@@ -93,7 +93,7 @@ function buildObservation(reading: TimeseriesReading, prefix: string, key: strin
   const observation: ObservationClient = {
     resultTime: reading.timestamp.toISOString(),
     hasResult: {
-      value: reading.value,
+      value: round(reading.value, 2), // many raw values have 3 decimal places, which feels like to much.
       unit: info.unit
     },
     observedProperty: info.observedProperty,
