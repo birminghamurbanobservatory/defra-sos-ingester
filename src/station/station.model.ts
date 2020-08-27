@@ -11,7 +11,7 @@ const timeseriesSchema = new mongoose.Schema({
     enum: ['pm2.5', 'pm10', 'so2', 'no2', 'nox', 'no', 'o3'], // what the timeseries measures
   },
   lastTime: {
-    type: Date, // i.e. the time the of the last reading that was processed
+    type: Date, // i.e. the time of the last reading that was processed
     required: false
   }
 }, 
